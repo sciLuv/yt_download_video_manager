@@ -14,8 +14,8 @@ Ce projet permet de télécharger et de gérer automatiquement les vidéos YouTu
 
 1. Clonez le dépôt Git :
    ```bash
-   git clone https://github.com/votre-utilisateur/yt_everyday_downloader.git
-   cd yt_everyday_downloader
+   git clone https://github.com/sciLuv/yt_download_video_manager
+   cd yt_download_video_manager
 
 2. Lancez deploy.sh comme un programme et suivez les instructions 
 3. pour relancer l'application ouvrir l'invite de commande à l'emplacement du projet et écrit `sudo python3 app.py` 
