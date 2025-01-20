@@ -1,0 +1,9 @@
+archive/
+config/
+download/
+docker_version/
+yt-auto-dl/
+.gitignore
+readme.md
+deploy.sh
+yt-dlp

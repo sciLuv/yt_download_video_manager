@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Vidéo Downloader</title>
+    <link rel="stylesheet" href="/style.css">
+    <script type="module" src="/script/main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <h1>Gestionnaire de Téléchargement YouTube</h1>
+    </header>
+
+    <main>
+        <div class="btn-container">
+            <button id="open-download-container" class="primary-button">Ajouter de videos <i class="fas fa-plus-circle"></i> </button>
+            <button id="open-channel-container" class="primary-button">Gérer les chaînes suivies <i class="fas fa-tv"></i></button>
+            <button id="open-directory-container" class="primary-button">Voir des vidéos <i class="fas fa-folder-open"></i></button>
+        </div>
+        <section id="video-dowload-container" class="hidden">
+            <div class="btn-container">
+                <button id="addChannelButton" class="primary-button neutral">Ajouter une chaîne <i class="fas fa-plus-circle"></i> </button>
+                <button id="downloadChannelButton" class="primary-button neutral">Télécharger une chaîne <i class="fas fa-cloud-download-alt"></i></button>
+                <button id="downloadPlaylistButton" class="primary-button neutral">Télécharger une playlist <i class="fas fa-cloud-download-alt"></i></button>
+                <button id="downloadSingleVideoButton" class="primary-button neutral">Télécharger une vidéo <i class="fas fa-cloud-download-alt"></i></button>
+            </div>
+        
+            <form id="url-form-add-channel" class="form-container hidden">
+                <label for="url">Ajouter une chaîne YouTube au tcheck-up régulier:</label>
+                <input type="text" id="url" name="url" placeholder="URL de la chaîne" required>
+                <label for="quality">Qualité :</label>
+                <select id="quality" name="quality">
+                    <option value="bestvideo+bestaudio">Vidéo + Audio (Meilleure qualité)</option>
+                    <option value="bestaudio">Audio uniquement</option>
+                    <option value="bestvideo[height<=1080]+bestaudio/best[height<=1080]">1080p</option>
+                    <option value="bestvideo[height<=720]+bestaudio/best[height<=720]">720p</option>
+                    <option value="bestvideo[height<=480]+bestaudio/best[height<=480]">480p</option>
+                    <option value="bestvideo[height<=360]+bestaudio/best[height<=360]">360p</option>
+                    <option value="bestvideo[height<=144]+bestaudio/best[height<=144]">140p</option>
+                    <option value="bestaudio[ext=mp3]">Audio MP3</option>
+                </select>
+                <button type="submit" class="primary-button">Ajouter</button>
+                <p id="response"></p>
+            </form>
+        
+            <form id="downloadVideosForm" class="form-container hidden">
+                <label for="channelUrl">Téléchargement de toutes les vidéos d'une chaîne:</label>
+                <input type="text" id="channelUrl" name="channelUrl" placeholder="Entrez l'URL de la chaîne" required>
+                <label for="channelQuality">Qualité :</label>
+                <select id="channelQuality" name="channelQuality">
+                    <option value="bestvideo+bestaudio">Vidéo + Audio (Meilleure qualité)</option>
+                    <option value="bestaudio">Audio uniquement</option>
+                    <option value="bestvideo[height<=1080]+bestaudio/best[height<=1080]">1080p</option>
+                    <option value="bestvideo[height<=720]+bestaudio/best[height<=720]">720p</option>
+                    <option value="bestvideo[height<=480]+bestaudio/best[height<=480]">480p</option>
+                    <option value="bestvideo[height<=360]+bestaudio/best[height<=360]">360p</option>
+                    <option value="bestvideo[height<=144]+bestaudio/best[height<=144]">140p</option>
+                    <option value="bestaudio[ext=mp3]">Audio MP3</option>
+                </select>
+                <button type="submit" class="primary-button">Télécharger</button>
+                <p id="downloadResponse"></p>
+            </form>
+        
+            <form id="downloadPlaylistForm" class="form-container hidden">
+                <label for="playlistUrl">Télécharger une playlist YouTube :</label>
+                <input type="text" id="playlistUrl" name="playlistUrl" placeholder="URL de la playlist" required>
+                <label for="playlistQuality">Qualité :</label>
+                <select id="playlistQuality" name="playlistQuality">
+                    <option value="bestvideo+bestaudio">Vidéo + Audio (Meilleure qualité)</option>
+                    <option value="bestaudio">Audio uniquement</option>
+                    <option value="bestvideo[height<=1080]+bestaudio/best[height<=1080]">1080p</option>
+                    <option value="bestvideo[height<=720]+bestaudio/best[height<=720]">720p</option>
+                    <option value="bestvideo[height<=480]+bestaudio/best[height<=480]">480p</option>
+                    <option value="bestvideo[height<=360]+bestaudio/best[height<=360]">360p</option>
+                    <option value="bestvideo[height<=144]+bestaudio/best[height<=144]">140p</option>
+                    <option value="bestaudio[ext=mp3]">Audio MP3</option>
+                </select>
+                <label for="folderName">Nom du dossier :</label>
+                <input type="text" id="folderName" name="folderName" placeholder="Nom du dossier" required>
+                <button type="submit" class="primary-button">Télécharger</button>
+                <p id="playlistDownloadResponse"></p>
+            </form>
+        
+            <form id="downloadSingleVideoForm" class="form-container hidden">
+                <label for="videoUrl">Téléchargement d'une seule vidéo :</label>
+                <input type="text" id="videoUrl" name="videoUrl" placeholder="Entrez l'URL de la vidéo" required>
+                <label for="videoQuality">Qualité :</label>
+                <select id="videoQuality" name="videoQuality">
+                    <option value="bestvideo+bestaudio">Vidéo + Audio (Meilleure qualité)</option>
+                    <option value="bestaudio">Audio uniquement</option>
+                    <option value="bestvideo[height<=1080]+bestaudio/best[height<=1080]">1080p</option>
+                    <option value="bestvideo[height<=720]+bestaudio/best[height<=720]">720p</option>
+                    <option value="bestvideo[height<=480]+bestaudio/best[height<=480]">480p</option>
+                    <option value="bestvideo[height<=360]+bestaudio/best[height<=360]">360p</option>
+                    <option value="bestvideo[height<=144]+bestaudio/best[height<=144]">140p</option>
+                    <option value="bestaudio[ext=mp3]">Audio MP3</option>
+                </select>
+                <button type="submit" class="primary-button">Télécharger</button>
+                <p id="singleVideoDownloadResponse"></p>
+            </form>
+        </section>
+        
+        <section id="channel-list" class="hidden"></section>
+        <section id="video-browser" class="hidden"></section>
+
+        <video id="video-player" controls style="display:none; width: 100%;"></video>
+    </main>
+
+    <!-- Modal for Edit/Delete -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="close-modal" class="close-button">&times;</span>
+            <h2>Gérer une chaîne</h2>
+            <p id="modal-channel-name"></p>
+            <label for="modal-quality">Modifier la qualité :</label>
+            <select id="modal-quality" style="margin: 10px;">
+                <option value="bestvideo+bestaudio">Vidéo + Audio (Meilleure qualité)</option>
+                <option value="bestaudio">Audio uniquement</option>
+                <option value="bestvideo[height<=1080]+bestaudio/best[height<=1080]">1080p</option>
+                <option value="bestvideo[height<=720]+bestaudio/best[height<=720]">720p</option>
+                <option value="bestvideo[height<=480]+bestaudio/best[height<=480]">480p</option>
+                <option value="bestvideo[height<=360]+bestaudio/best[height<=360]">360p</option>
+                <option value="bestvideo[height<=144]+bestaudio/best[height<=144]">140p</option>
+                <option value="bestaudio[ext=mp3]">Audio MP3</option>
+            </select>
+            <div class="modal-buttons">
+                <button id="return-button" class="primary-button">Retour</button>
+                <button id="update-channel" class="primary-button neutral">Modifier</button>
+                <button id="delete-channel" class="secondary-button">Supprimer</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

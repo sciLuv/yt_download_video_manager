@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: docker_version/Dockerfile
+    container_name: ytdl_app
+    ports:
+      - "5000:5000"  # Mappe le port 5000
+    volumes:
+      - ../download:/app/download  # Bind mount pour accéder aux fichiers depuis le parent
+    environment:
+      - ENV=production
