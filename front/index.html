@@ -105,8 +105,17 @@
         <section id="channel-list" class="hidden"></section>
         <section id="video-browser" class="hidden"></section>
 
-        <video id="video-player" controls style="display:none; width: 100%;"></video>
+        
     </main>
+
+    <div id="videoModal" class="modal-vid">
+        <div class="modal-vid-content">
+          <span class="close" id="close-vid">&times;</span>
+            <div class="video-container">
+                <video id="video-player" controls></video>
+            </div>
+        </div>
+      </div>
 
     <!-- Modal for Edit/Delete -->
     <div id="modal" class="modal hidden">

@@ -2,6 +2,7 @@ import { initForm } from './controller.js';
 import { initToggleSections, initToggleDownloadForms } from './basic.js';
 import { port, ip } from './env.js'
 
+const videoPlayer = document.getElementById("video-player");
 
 document.addEventListener("DOMContentLoaded", () => {
   initForm();
@@ -10,10 +11,31 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+function openModal(videoUrl) {
+  const modal = document.getElementById('videoModal');
+  modal.style.display = 'block';
+  videoPlayer.src = videoUrl
+  videoPlayer.play(); // Lecture uniquement quand l'utilisateur clique
+}
+
+function closeModal() {
+  const modal = document.getElementById('videoModal');
+  videoPlayer.src = ''; // Arrête la vidéo
+  modal.style.display = 'none';
+}
+
+
+const closeVid = document.getElementById("close-vid")
+
+closeVid.addEventListener('click', function(){
+    closeModal();
+})
+
+
+
 async function loadDirectory(subpath = "") {
     const url = `http://${ip}:${port}/browse/${subpath}`;
     const videoBrowser = document.getElementById("video-browser");
-    const videoPlayer = document.getElementById("video-player");
 
     try {
         
@@ -65,10 +87,8 @@ async function loadDirectory(subpath = "") {
                 const fileExt = item.name.split('.').pop().toLowerCase();
                 if (['mp4', 'webm', 'ogg'].includes(fileExt)) {
                     // Ajouter un événement pour jouer la vidéo lorsque l'utilisateur clique
-                    itemElement.addEventListener("click", () => {
-                        videoPlayer.src = `http://${ip}:${port}/browse/${data.path}/${item.name}`;
-                        videoPlayer.style.display = "block";
-                        videoPlayer.play(); // Lecture uniquement quand l'utilisateur clique
+                    itemElement.addEventListener("click", () => {     
+                        openModal(`http://${ip}:${port}/browse/${data.path}/${item.name}`)
                     });
                 } else {
                     alert("Type de fichier non supporté pour la lecture.");
